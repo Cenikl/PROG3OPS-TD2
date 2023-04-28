@@ -1,27 +1,23 @@
 AWSTemplateFormatVersion: 2010-09-09
-Parameters:
-  DBName:
-    Type: String
-    Value: uniquedatabase
 Resources:
   PostgresRDS:
     Type: AWS::RDS::DBInstance
     DeletionPolicy: Retain
     Properties:
-      DBName: !Ref DBName
+      DBName: uniquedatabase
       DBInstanceClass: db.t2.micro
       Engine: postgres
       MasterUsername: !Sub "{{resolve:ssm:masterusername}}"
       MasterUserPassword: !Sub "{{resolve:ssm:masteruserpassword}}"
       AllocatedStorage: "20"
   DBUsername:
-    Type: 'AWS::SSM::Parameter'
+    Type: AWS::SSM::Parameter
     Properties:
       Name: Rdsusername
       Type: String
       Value: ${{ secrets.DB_USERNAME }}
   DBPassword:
-    Type: 'AWS::SSM::Parameter'
+    Type: AWS::SSM::Parameter
     Properties:
       Name: Rdspassword
       Type: String
