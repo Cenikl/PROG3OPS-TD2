@@ -15,13 +15,13 @@ Resources:
     Properties:
       Name: Rdsusername
       Type: String
-      Value: ${{ secrets.DB_USERNAME }}
+      Value: !Sub "{{resolve:ssm:masterusername}}"
   DBPassword:
     Type: AWS::SSM::Parameter
     Properties:
       Name: Rdspassword
       Type: String
-      Value: ${{ secrets.DB_PASSWORD }}
+      Value: !Sub "{{resolve:ssm:masteruserpassword}}"
   ReturnValue:
     Type: 'AWS::SSM::Parameter'
     Properties:
