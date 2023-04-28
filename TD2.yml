@@ -32,6 +32,8 @@ Resources:
       Name: alinkmaybe
       Type: String
       Value: !Join ['',[jdbc:postgresql://, !GetAtt PostgresRDS.Endpoint.Address, ":", !GetAtt PostgresRDS.Endpoint.Port, "/", !Ref PostgresRDS]]
+
 Outputs:
   DatabaseName:
+    Description: Return the database name
     Value: !Ref PostgresRDS
